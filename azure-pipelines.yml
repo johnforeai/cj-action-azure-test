@@ -1,11 +1,11 @@
- trigger: none
+trigger: none
 
-  pool:
-    vmImage: ubuntu-latest
+pool:
+  vmImage: ubuntu-latest
 
-  steps:
-  - bash: docker run --rm -e "INPUT_SERVICE_ACCOUNT_KEY=$CJ_SERVICE_ACCOUNT_KEY" -e "INPUT_TEST_SUITE_ID=$CJ_TEST_SUITE_ID" foreai/cj-action:latest
-    displayName: 'Run Critical Journey Tests'
-    env:
-      CJ_SERVICE_ACCOUNT_KEY: $(CJ_SERVICE_ACCOUNT_KEY)
-      CJ_TEST_SUITE_ID: $(CJ_TEST_SUITE_ID)
+steps:
+- bash: docker run --rm -e "INPUT_SERVICE_ACCOUNT_KEY=$CJ_SERVICE_ACCOUNT_KEY" -e "INPUT_TEST_SUITE_ID=$CJ_TEST_SUITE_ID" foreai/cj-action:latest
+  displayName: 'Run Critical Journey Tests'
+  env:
+    CJ_SERVICE_ACCOUNT_KEY: $(CJ_SERVICE_ACCOUNT_KEY)
+    CJ_TEST_SUITE_ID: $(CJ_TEST_SUITE_ID)
