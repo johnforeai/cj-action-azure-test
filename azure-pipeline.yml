@@ -1,18 +1,34 @@
-trigger:
-  - main
+ trigger: none
 
-pool:
-  name: Default
+  pool:
+    vmImage: ubuntu-latest
 
-steps:
-  - script: |
-      docker run --rm \
-        -e "INPUT_SERVICE_ACCOUNT_KEY=$(CJ_SERVICE_ACCOUNT_KEY)" \
-        -e "INPUT_TEST_SUITE_ID=$(CJ_TEST_SUITE_ID)" \
-        -e "INPUT_WAIT_TIMEOUT_SECONDS=360" \
-        -e "INPUT_PARAMS_OVERRIDE={\"param1\":\"value1\",\"param2\":\"value2\"}" \
-        -e "INPUT_BROWSER_TYPE_OVERRIDE=chromium" \
-        foreai/cj-action:latest
-    displayName: 'Run fore ai Test Suite'
-    env:
-      CJ_SERVICE_ACCOUNT_KEY: $(CJ_SERVICE_ACCOUNT_KEY)
+  steps:
+    - bash: |
+        docker run --rm \
+          -e "INPUT_SERVICE_ACCOUNT_KEY=$CJ_SERVICE_ACCOUNT_KEY" \
+          -e "INPUT_TEST_SUITE_ID=$CJ_TEST_SUITE_ID" \
+          foreai/cj-action:latest
+      displayName: 'Run Critical Journey Tests'
+      env:
+        CJ_SERVICE_ACCOUNT_KEY: $(CJ_SERVICE_ACCOUNT_KEY)
+        CJ_TEST_SUITE_ID: $(CJ_TEST_SUITE_ID)
+
+# trigger:
+#   - main
+
+# pool:
+#   name: Default
+
+# steps:
+#   - script: |
+#       docker run --rm \
+#         -e "INPUT_SERVICE_ACCOUNT_KEY=$(CJ_SERVICE_ACCOUNT_KEY)" \
+#         -e "INPUT_TEST_SUITE_ID=$(CJ_TEST_SUITE_ID)" \
+#         -e "INPUT_WAIT_TIMEOUT_SECONDS=360" \
+#         -e "INPUT_PARAMS_OVERRIDE={\"param1\":\"value1\",\"param2\":\"value2\"}" \
+#         -e "INPUT_BROWSER_TYPE_OVERRIDE=chromium" \
+#         foreai/cj-action:latest
+#     displayName: 'Run fore ai Test Suite'
+#     env:
+#       CJ_SERVICE_ACCOUNT_KEY: $(CJ_SERVICE_ACCOUNT_KEY)
