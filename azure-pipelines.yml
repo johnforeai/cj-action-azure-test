@@ -2,7 +2,7 @@ trigger:
   - main
 
 pool:
-  name: azure-integration-pool
+  name: fore-ai-pool
 
 steps:
   - script: |
