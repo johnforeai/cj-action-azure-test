@@ -2,7 +2,7 @@ trigger:
   - main
 
 pool:
-  name: fore-ai
+  name: localMac
 
 steps:
   - script: |
